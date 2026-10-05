@@ -1,5 +1,7 @@
 # 手机文件共享（LanFileShare）
 
+<div align="center"><img src="docs/logo.jpg" width="140" alt="logo"/></div>
+
 把安卓手机变成一台**局域网文件服务器**：手机上启动服务后，同一局域网内的电脑用浏览器打开 `http://手机IP:8080`，即可收发文件，无需在电脑上安装任何软件（适合受限的公司电脑）。
 
 ## 功能
