@@ -3,25 +3,23 @@ package com.lanshare.filesync
 import io.ktor.http.ContentType
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpStatusCode
-import io.ktor.http.content.LocalFileContent
-import io.ktor.http.content.OutgoingContent
-import io.ktor.http.content.PartData
+import io.ktor.http.content.*
 import io.ktor.server.application.Application
 import io.ktor.server.application.ApplicationCall
 import io.ktor.server.application.install
 import io.ktor.server.cio.CIO
 import io.ktor.server.engine.ApplicationEngine
 import io.ktor.server.engine.embeddedServer
+import io.ktor.server.http.content.LocalFileContent
 import io.ktor.server.plugins.partialcontent.PartialContent
-import io.ktor.server.request.receiveMultipart
-import io.ktor.server.request.receiveText
+import io.ktor.server.request.*
 import io.ktor.server.response.respond
 import io.ktor.server.response.respondText
 import io.ktor.server.routing.get
 import io.ktor.server.routing.post
 import io.ktor.server.routing.routing
 import io.ktor.utils.io.ByteWriteChannel
-import io.ktor.utils.io.toOutputStream
+import io.ktor.utils.io.jvm.javaio.toOutputStream
 import org.json.JSONArray
 import org.json.JSONObject
 import java.io.File
@@ -64,17 +62,19 @@ class LanFileServer(
     private fun Application.module() {
         install(PartialContent) { maxRangeCount = 16 }
         routing {
-            get("/") { call.respondText(html, ContentType.Text.Html) }
-            get("/api/list") { handleList(call) }
-            get("/api/file") { handleFile(call) }
-            get("/api/zip") { handleZipGet(call) }
-            post("/api/zip") { handleZipPost(call) }
-            post("/api/upload") { handleUpload(call) }
-            post("/api/mkdir") { handleMkdir(call) }
-            post("/api/newfile") { handleNewFile(call) }
-            post("/api/save") { handleSave(call) }
-            post("/api/rename") { handleRename(call) }
-            post("/api/delete") { handleDelete(call) }
+            // 说明：路由处理器里用 PipelineContext 的成员 context（即 ApplicationCall），
+            // 避免依赖不同 Ktor 版本中 call 扩展所在的包。
+            get("/") { context.respondText(html, ContentType.Text.Html) }
+            get("/api/list") { handleList(context) }
+            get("/api/file") { handleFile(context) }
+            get("/api/zip") { handleZipGet(context) }
+            post("/api/zip") { handleZipPost(context) }
+            post("/api/upload") { handleUpload(context) }
+            post("/api/mkdir") { handleMkdir(context) }
+            post("/api/newfile") { handleNewFile(context) }
+            post("/api/save") { handleSave(context) }
+            post("/api/rename") { handleRename(context) }
+            post("/api/delete") { handleDelete(context) }
         }
     }
 
