@@ -40,6 +40,11 @@
             android:name=".FolderPickerActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".CompressActivity"
+            android:exported="false"
+            android:label="照片压缩打包" />
+
         <service
             android:name=".ServerService"
             android:exported="false"

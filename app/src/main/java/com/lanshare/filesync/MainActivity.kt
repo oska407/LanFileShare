@@ -40,6 +40,7 @@ class MainActivity : Activity() {
     private lateinit var tipText: TextView
     private lateinit var startBtn: Button
     private lateinit var pickBtn: Button
+    private lateinit var packBtn: Button
     private lateinit var permBtn: Button
     private lateinit var awakeSwitch: Switch
 
@@ -62,6 +63,7 @@ class MainActivity : Activity() {
         tipText = findViewById(R.id.tipText)
         startBtn = findViewById(R.id.startBtn)
         pickBtn = findViewById(R.id.pickBtn)
+        packBtn = findViewById(R.id.packBtn)
         permBtn = findViewById(R.id.permBtn)
         awakeSwitch = findViewById(R.id.awakeSwitch)
 
@@ -90,6 +92,10 @@ class MainActivity : Activity() {
         }
 
         permBtn.setOnClickListener { requestStoragePermission() }
+
+        packBtn.setOnClickListener {
+            startActivity(Intent(this, CompressActivity::class.java))
+        }
 
         urlText.setOnClickListener {
             val url = urlText.text.toString().split("\n").firstOrNull { it.startsWith("http") }
