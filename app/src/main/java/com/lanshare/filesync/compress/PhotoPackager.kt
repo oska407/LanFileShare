@@ -19,10 +19,9 @@ object PhotoPackager {
     const val MAX_PICK = 100
 
     data class Config(
-        val targetKb: Int,          // 单张目标体积（KB）
-        val maxEdge: Int,           // 长边像素上限
-        val sequentialNames: Boolean, // 是否用 IMG_001 顺序命名
-        val subDir: String          // 共享目录下的子目录名，留空表示直接放共享根目录
+        val targetKb: Int,   // 单张目标体积（KB）
+        val maxEdge: Int,    // 长边像素上限
+        val subDir: String   // 共享目录下的子目录名，留空表示直接放共享根目录
     )
 
     data class Result(
@@ -59,7 +58,6 @@ object PhotoPackager {
         val usedNames = HashSet<String>()
         var totalOriginal = 0L
         var totalCompressed = 0L
-        var seq = 1
 
         val n = uris.size
         val targetBytes = cfg.targetKb * 1024L
@@ -78,11 +76,8 @@ object PhotoPackager {
             }
             totalOriginal += cached.length()
 
-            val baseName = if (cfg.sequentialNames) {
-                String.format(Locale.US, "IMG_%03d", seq++)
-            } else {
-                uniqueName(usedNames, FileIo.safeBaseName(rawName))
-            }
+            // 文件名保持原名（仅清洗非法字符、重名加 _2），不使用顺序命名
+            val baseName = uniqueName(usedNames, FileIo.safeBaseName(rawName))
 
             try {
                 val r = ImageCompressor.compress(

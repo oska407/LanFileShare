@@ -103,6 +103,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:orientation="vertical" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="张数较多时约需 1–3 分钟，请保持页面在前台"
+                android:textColor="#999999"
+                android:textSize="12sp" />
         </LinearLayout>
 
         <!-- 参数 -->
@@ -153,14 +161,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp" />
-
-            <CheckBox
-                android:id="@+id/seqCheck"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="使用 IMG_001 顺序命名（避免中文名在 Windows 解压乱码）"
-                android:textSize="13sp" />
 
             <EditText
                 android:id="@+id/subDirEdit"

@@ -14,7 +14,6 @@ import android.provider.Settings
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.ProgressBar
@@ -45,7 +44,6 @@ class CompressActivity : Activity() {
     private lateinit var targetKbText: TextView
     private lateinit var targetKbBar: SeekBar
     private lateinit var edgeSpinner: Spinner
-    private lateinit var seqCheck: CheckBox
     private lateinit var subDirEdit: EditText
     private lateinit var startBtn: Button
     private lateinit var progressBar: ProgressBar
@@ -69,7 +67,6 @@ class CompressActivity : Activity() {
         targetKbText = findViewById(R.id.targetKbText)
         targetKbBar = findViewById(R.id.targetKbBar)
         edgeSpinner = findViewById(R.id.edgeSpinner)
-        seqCheck = findViewById(R.id.seqCheck)
         subDirEdit = findViewById(R.id.subDirEdit)
         startBtn = findViewById(R.id.startBtn)
         progressBar = findViewById(R.id.progressBar)
@@ -181,7 +178,6 @@ class CompressActivity : Activity() {
         val cfg = PhotoPackager.Config(
             targetKb = targetKb(),
             maxEdge = maxEdge(),
-            sequentialNames = seqCheck.isChecked,
             subDir = subDirEdit.text.toString()
         )
         val root = File(sharedRoot())
